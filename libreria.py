@@ -9,9 +9,12 @@ En este taller aprenderás a crear funciones en Python, desde las básicas hasta
 Crea una función llamada `agregar_libro` que acepte dos parámetros, `titulo` y `autor`,
 y que retorne un diccionario con el título y el autor del libro.
 """
+def agregar_libro(titulo, autor):
+    return {
+        "titulo": titulo,
+        "autor": autor
+    }
 
-# Escribe tu código aquí
-# Prueba la función con algunos valores
 
 
 """
@@ -19,9 +22,13 @@ y que retorne un diccionario con el título y el autor del libro.
 Crea una función llamada `listar_libros` que acepte una lista de diccionarios `libros` y 
 que retorne una lista con los títulos de los libros.
 """
+def listar_libros(libros):
+    titulos = []
 
-# Escribe tu código aquí
-# Prueba la función con algunos valores
+    for libro in libros:
+        titulos.append(libro["titulo"])
+
+    return titulos
 
 
 """
@@ -30,7 +37,14 @@ Crea una función llamada `buscar_libro` que acepte una lista de diccionarios `l
 que retorne el diccionario del libro que coincida con el título, o `None` si no se encuentra.
 """
 
-# Escribe tu código aquí
+def buscar_libro(libros, titulo):
+    for libro in libros:
+        if libro["titulo"] == titulo:
+            return libro
+
+    return None
+
+
 
 # Prueba la función con algunos valores
 
@@ -40,9 +54,18 @@ Crea una función llamada `quitar_libro` que acepte una lista de diccionarios `l
 que intente quitar el libro con el título especificado. Si no se encuentra el libro, maneja el error adecuadamente.
 """
 
-# Escribe tu código aquí
+def quitar_libro(libros, titulo):
+    try:
+        for libro in libros:
+            if libro["titulo"] == titulo:
+                libros.remove(libro)
+                return True
 
-# Prueba la función con algunos valores
+        raise ValueError("El libro no existe")
+
+    except ValueError as error:
+        print(error)
+        return False
 
 
 """
@@ -51,7 +74,19 @@ Crea una función llamada `crear_inventario` que acepte una lista de diccionario
 que retorne un diccionario con la cantidad de libros por autor.
 """
 
-# Escribe tu código aquí
+
+def crear_inventario(libros):
+    inventario = {}
+
+    for libro in libros:
+        autor = libro["autor"]
+
+        if autor in inventario:
+            inventario[autor] += 1
+        else:
+            inventario[autor] = 1
+
+    return inventario
 
 # Prueba la función con algunos valores
 
@@ -62,7 +97,14 @@ Crea una función llamada `libros_por_autor` que acepte una lista de diccionario
 que retorne una lista con los títulos de los libros escritos por el autor especificado.
 """
 
-# Escribe tu código aquí
+def libros_por_autor(libros, autor):
+    titulos = []
+
+    for libro in libros:
+        if libro["autor"] == autor:
+            titulos.append(libro["titulo"])
+
+    return titulos
 
 # Prueba la función con algunos valores
 
@@ -72,7 +114,11 @@ Crea una función llamada `existe_libro` que acepte una lista de diccionarios `l
 que retorne `True` si el libro existe en la lista, y `False` en caso contrario.
 """
 
-# Escribe tu código aquí
+def existe_libro(libros, titulo):
+    for libro in libros:
+        if libro["titulo"] == titulo:
+            return True
 
+    return False
 # Prueba la función con algunos valores
 
